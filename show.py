@@ -9,9 +9,9 @@ class Show(object):
 
     def toString(self):
         if (self.Is720p):
-            return "{0} (720p)".format(self.CompleteText)
+            return "{0} (720p)".format(self.Name)
         else:
-            return "{0}".format(self.CompleteText)
+            return "{0} (HDTV)".format(self.Name)
 
     # Evaluate last download and download
     def downloadTorrent(self, recovered):
@@ -68,3 +68,15 @@ class ShowManager(object):
         showList.append(Show("Default2"))
 
         self.updateShowList(showList)
+
+    def removeByName(self,showList, search):
+        i = 0
+        itemsRemoved = 0;
+        while (i < len(showList)):
+            if showList[i].Name.lower() == search.lower():
+                showList.remove(showList[i])
+                itemsRemoved += 1
+            i += 1
+
+        self.updateShowList(showList)
+        return itemsRemoved
